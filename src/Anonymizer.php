@@ -97,7 +97,7 @@ class Anonymizer
             $column['where']
         );
 
-        if (!$rows) {
+        if (empty($rows)) {
             return;
         }
 

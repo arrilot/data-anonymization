@@ -8,7 +8,7 @@ interface DatabaseInterface
      * Get all rows from a $table specified by where. Only $columns are selected.
      *
      * @param string      $table
-     * @param string      $columns
+     * @param array       $columns
      * @param string|null $where
      *
      * @return array
@@ -21,8 +21,8 @@ interface DatabaseInterface
      *
      * @param string $table
      * @param array  $primaryKeyValue
-     * @param string $column
-     * @param string $newValue
+     * @param array  $column
+     * @param mixed  $newValue
      *
      * @return void
      */
