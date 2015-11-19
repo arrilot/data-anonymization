@@ -16,9 +16,9 @@ class SqlDatabase implements DatabaseInterface
     /**
      * Constructor.
      *
-     * @param string $dsn
-     * @param string $user
-     * @param string $password
+     * @param string     $dsn
+     * @param string     $user
+     * @param string     $password
      * @param null|array $options
      */
     public function __construct($dsn, $user, $password, $options = null)
@@ -26,7 +26,7 @@ class SqlDatabase implements DatabaseInterface
         if (is_null($options)) {
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ];
         }
 
@@ -36,8 +36,8 @@ class SqlDatabase implements DatabaseInterface
     /**
      * Get all rows from a $table specified by where. Only $columns are selected.
      *
-     * @param string $table
-     * @param string $columns
+     * @param string      $table
+     * @param string      $columns
      * @param string|null $where
      *
      * @return array
@@ -59,7 +59,7 @@ class SqlDatabase implements DatabaseInterface
      * Update is performed on a row specified by $primaryValue of $table.
      *
      * @param string $table
-     * @param array $primaryKeyValue
+     * @param array  $primaryKeyValue
      * @param string $column
      * @param string $newValue
      *

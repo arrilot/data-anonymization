@@ -7,8 +7,8 @@ interface DatabaseInterface
     /**
      * Get all rows from a $table specified by where. Only $columns are selected.
      *
-     * @param string $table
-     * @param string $columns
+     * @param string      $table
+     * @param string      $columns
      * @param string|null $where
      *
      * @return array
@@ -20,7 +20,7 @@ interface DatabaseInterface
      * Update is performed on a row specified by $primaryValue of $table.
      *
      * @param string $table
-     * @param array $primaryKeyValue
+     * @param array  $primaryKeyValue
      * @param string $column
      * @param string $newValue
      *

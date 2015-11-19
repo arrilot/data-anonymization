@@ -56,7 +56,7 @@ class Anonymizer
     /**
      * Describe a table with a given callback.
      *
-     * @param string $name
+     * @param string   $name
      * @param callable $callback
      *
      * @return void
@@ -86,8 +86,8 @@ class Anonymizer
      * Update all needed values of a give column.
      *
      * @param string $table
-     * @param array $primary
-     * @param array $column
+     * @param array  $primary
+     * @param array  $column
      */
     protected function updateColumn($table, $primary, $column)
     {
@@ -126,7 +126,7 @@ class Anonymizer
     /**
      * Merge columns for select.
      *
-     * @param array $primary
+     * @param array  $primary
      * @param string $columnName
      *
      * @return array
@@ -134,7 +134,7 @@ class Anonymizer
     protected function mergeColumns($primary, $columnName)
     {
         return array_merge($primary, [
-            $columnName
+            $columnName,
         ]);
     }
 }

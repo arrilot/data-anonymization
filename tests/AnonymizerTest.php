@@ -19,7 +19,7 @@ class AnonymizerTest extends PHPUnit_Framework_TestCase
 
     public function testRun()
     {
-        $database =  m::mock('Arrilot\DataAnonymization\Database\DatabaseInterface');
+        $database = m::mock('Arrilot\DataAnonymization\Database\DatabaseInterface');
         $database->shouldReceive('getRows')->twice()->andReturn([
             ['id' => 1, 'name' => 'Jane', 'email' => 'jane@gmail.com'],
             ['id' => 2, 'name' => 'Jack', 'email' => 'jack@gmail.com'],

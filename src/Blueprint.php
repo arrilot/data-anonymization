@@ -42,7 +42,7 @@ class Blueprint
     /**
      * Blueprint constructor.
      *
-     * @param string $table
+     * @param string        $table
      * @param callable|null $callback
      */
     public function __construct($table, callable $callback)
@@ -55,13 +55,14 @@ class Blueprint
      * Add a column to blueprint.
      *
      * @param string $name
+     *
      * @return $this
      */
     public function column($name)
     {
         $this->currentColumn = [
-            'name' => $name,
-            'where' => null,
+            'name'    => $name,
+            'where'   => null,
             'replace' => null,
         ];
 
@@ -72,6 +73,7 @@ class Blueprint
      * Add where to the current column.
      *
      * @param string $rawSql
+     *
      * @return $this
      */
     public function where($rawSql)
@@ -80,7 +82,6 @@ class Blueprint
 
         return $this;
     }
-
 
     /**
      * Set how data should be replaced.
