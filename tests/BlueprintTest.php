@@ -9,6 +9,12 @@ use PHPUnit_Framework_TestCase;
 
 class BlueprintTest extends PHPUnit_Framework_TestCase
 {
+
+    public function tearDown()
+    {
+        Blueprint::setDefaultPrimary('id');
+    }
+
     /**
      * Helper to call a callback with Faker.
      *
@@ -40,6 +46,25 @@ class BlueprintTest extends PHPUnit_Framework_TestCase
         // Composite
         $blueprint = new Blueprint('users', function (Blueprint $table) {
             $table->primary(['id', 'category_id']);
+        });
+        $result = $blueprint->build();
+        $this->assertSame(['id', 'category_id'], $result->primary);
+    }
+
+    public function testSettingDefaultPrimary()
+    {
+        // String
+        Blueprint::setDefaultPrimary('category_id');
+        $blueprint = new Blueprint('users', function (Blueprint $table) {
+            // No primary is specified.
+        });
+        $result = $blueprint->build();
+        $this->assertSame(['category_id'], $result->primary);
+
+        // Array
+        Blueprint::setDefaultPrimary(['id', 'category_id']);
+        $blueprint = new Blueprint('users', function (Blueprint $table) {
+            // No primary is specified.
         });
         $result = $blueprint->build();
         $this->assertSame(['id', 'category_id'], $result->primary);

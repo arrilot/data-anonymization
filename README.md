@@ -48,6 +48,7 @@ $anonymizer = new Anonymizer($database);
 $anonymizer->table('users', function (Blueprint $table) {
     // Specify a primary key of the table. For composite key an array should be passed in.
     // This step can be skipped if you have `id` as a primary key.
+    // You can change default primary key for all tables with `Blueprint::setDefaultPrimary('ID')`
     $table->primary('id');
 
     // Replace with static data.

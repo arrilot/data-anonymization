@@ -5,6 +5,13 @@ namespace Arrilot\DataAnonymization;
 class Blueprint
 {
     /**
+     * Default primary key for all blueprints.
+     *
+     * @var array
+     */
+    protected static $defaultPrimary = ['id'];
+
+    /**
      * Table to blueprint.
      *
      * @var string
@@ -23,7 +30,7 @@ class Blueprint
      *
      * @var array
      */
-    public $primary = ['id'];
+    public $primary;
 
     /**
      * Current column.
@@ -49,6 +56,16 @@ class Blueprint
     {
         $this->table = $table;
         $this->callback = $callback;
+    }
+
+    /**
+     * Setter for default primary key.
+     *
+     * @param string|array $primary
+     */
+    public static function setDefaultPrimary($primary)
+    {
+        self::$defaultPrimary = is_array($primary) ? $primary : [$primary];
     }
 
     /**
@@ -107,6 +124,10 @@ class Blueprint
         $callback = $this->callback;
 
         $callback($this);
+
+        if (is_null($this->primary)) {
+            $this->primary = self::$defaultPrimary;
+        }
 
         return $this;
     }
