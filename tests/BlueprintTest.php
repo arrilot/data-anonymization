@@ -9,7 +9,6 @@ use PHPUnit_Framework_TestCase;
 
 class BlueprintTest extends PHPUnit_Framework_TestCase
 {
-
     public function tearDown()
     {
         Blueprint::setDefaultPrimary('id');

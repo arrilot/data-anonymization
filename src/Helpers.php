@@ -7,7 +7,7 @@ class Helpers
     /**
      * Array only.
      *
-     * @param array $array
+     * @param array        $array
      * @param array|string $keys
      * @return array
      */
