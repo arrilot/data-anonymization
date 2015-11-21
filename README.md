@@ -5,7 +5,7 @@
 
 # Data anonymization
 
-* This is a simple framework-agnostic package helps you to replace any sensitive production data in your development databases. *
+* This simple framework-agnostic package helps you to replace any sensitive production data in your development databases.
 
 ## Installation
 
@@ -19,7 +19,7 @@ Workflow:
 
 2. Define how you want to anonymize your data in this file using fluent api (see example below).
 
-3. Make sure it is not accessable throw the web and etc.
+3. Make sure it is not accessible throw the web and etc.
 
 4. Run it every time you want.
 
