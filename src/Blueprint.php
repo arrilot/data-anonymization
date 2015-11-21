@@ -61,11 +61,11 @@ class Blueprint
     /**
      * Setter for default primary key.
      *
-     * @param string|array $primary
+     * @param string|array $key
      */
-    public static function setDefaultPrimary($primary)
+    public static function setDefaultPrimary($key)
     {
-        self::$defaultPrimary = is_array($primary) ? $primary : [$primary];
+        self::$defaultPrimary = (array) $key;
     }
 
     /**
@@ -141,7 +141,7 @@ class Blueprint
      */
     public function primary($key)
     {
-        $this->primary = is_array($key) ? $key : [$key];
+        $this->primary = (array) $key;
 
         return $this;
     }

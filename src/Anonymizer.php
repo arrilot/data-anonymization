@@ -5,7 +5,6 @@ namespace Arrilot\DataAnonymization;
 use Arrilot\DataAnonymization\Database\DatabaseInterface;
 use Faker\Factory;
 use Faker\Generator;
-use Illuminate\Support\Arr;
 
 class Anonymizer
 {
@@ -104,7 +103,7 @@ class Anonymizer
         foreach ($rows as $row) {
             $this->database->updateByPrimary(
                 $table,
-                Arr::only($row, $primary),
+                Helpers::arrayOnly($row, $primary),
                 $column['name'],
                 $this->calculateNewValue($column['replace'])
             );
