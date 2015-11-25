@@ -33,7 +33,7 @@ class Anonymizer
      * Constructor.
      *
      * @param DatabaseInterface $database
-     * @param mixed $generator
+     * @param mixed             $generator
      */
     public function __construct(DatabaseInterface $database, $generator = null)
     {
@@ -158,7 +158,7 @@ class Anonymizer
     }
 
     /**
-     * Replace placeholders
+     * Replace placeholders.
      *
      * @param mixed $value
      * @param int   $rowNum
@@ -176,6 +176,7 @@ class Anonymizer
 
     /**
      * @param $replace
+     *
      * @return mixed
      */
     protected function handlePossibleClosure($replace)
