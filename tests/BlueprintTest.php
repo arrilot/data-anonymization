@@ -3,9 +3,8 @@
 namespace Arrilot\Tests\DataAnonymization;
 
 use Arrilot\DataAnonymization\Blueprint;
-use Faker\Factory;
-use Faker\Generator;
 use PHPUnit_Framework_TestCase;
+use StdClass;
 
 class BlueprintTest extends PHPUnit_Framework_TestCase
 {
@@ -21,9 +20,9 @@ class BlueprintTest extends PHPUnit_Framework_TestCase
      *
      * @return mixed
      */
-    protected function callFakerCallback(callable $callback)
+    protected function callGeneratorCallback(callable $callback)
     {
-        return call_user_func($callback, Factory::create());
+        return call_user_func($callback, new StdClass());
     }
 
     public function testPrimary()
@@ -104,7 +103,7 @@ class BlueprintTest extends PHPUnit_Framework_TestCase
     public function testReplaceWithDynamicData()
     {
         $blueprint = new Blueprint('users', function (Blueprint $table) {
-            $table->column('email')->replaceWith(function (Generator $faker) {
+            $table->column('email')->replaceWith(function ($generator) {
                 return 'some dynamic data';
             });
         });
@@ -116,7 +115,7 @@ class BlueprintTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $result->columns);
         $this->assertSame('email', $result->columns[0]['name']);
         $this->assertInstanceOf('Closure', $result->columns[0]['replace']);
-        $this->assertSame('some dynamic data', $this->callFakerCallback($result->columns[0]['replace']));
+        $this->assertSame('some dynamic data', $this->callGeneratorCallback($result->columns[0]['replace']));
         $this->assertNull($result->columns[0]['where']);
     }
 }

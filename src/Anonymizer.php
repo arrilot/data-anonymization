@@ -4,7 +4,7 @@ namespace Arrilot\DataAnonymization;
 
 use Arrilot\DataAnonymization\Database\DatabaseInterface;
 use Faker\Factory;
-use Faker\Generator;
+use Mockery\CountValidator\Exception;
 
 class Anonymizer
 {
@@ -16,11 +16,11 @@ class Anonymizer
     protected $database;
 
     /**
-     * Faker generator instance object.
+     * Generator object (e.g faker).
      *
-     * @var Generator
+     * @var mixed
      */
-    protected $faker;
+    protected $generator;
 
     /**
      * Blueprints for tables.
@@ -33,11 +33,43 @@ class Anonymizer
      * Constructor.
      *
      * @param DatabaseInterface $database
+     * @param mixed $generator
      */
-    public function __construct(DatabaseInterface $database)
+    public function __construct(DatabaseInterface $database, $generator = null)
     {
         $this->database = $database;
-        $this->faker = Factory::create();
+
+        $this->setGenerator($generator);
+    }
+
+    /**
+     * Setter for generator.
+     *
+     * @param mixed $generator
+     *
+     * @return $this
+     */
+    public function setGenerator($generator)
+    {
+        if ($generator !== null) {
+            $this->generator = $generator;
+        }
+
+        if (class_exists('\Faker\Factory')) {
+            $this->generator = Factory::create();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Getter for generator.
+     *
+     * @return mixed
+     */
+    public function getGenerator()
+    {
+        return $this->generator;
     }
 
     /**
@@ -100,12 +132,12 @@ class Anonymizer
             return;
         }
 
-        foreach ($rows as $row) {
+        foreach ($rows as $rowNum => $row) {
             $this->database->updateByPrimary(
                 $table,
                 Helpers::arrayOnly($row, $primary),
                 $column['name'],
-                $this->calculateNewValue($column['replace'])
+                $this->calculateNewValue($column['replace'], $rowNum)
             );
         }
     }
@@ -114,12 +146,49 @@ class Anonymizer
      * Calculate new value for each row.
      *
      * @param string|callable $replace
+     * @param int             $rowNum
+     *
+     * @return string
+     */
+    protected function calculateNewValue($replace, $rowNum)
+    {
+        $value = $this->handlePossibleClosure($replace);
+
+        return $this->replacePlaceholders($value, $rowNum);
+    }
+
+    /**
+     * Replace placeholders
+     *
+     * @param mixed $value
+     * @param int   $rowNum
      *
      * @return mixed
      */
-    protected function calculateNewValue($replace)
+    protected function replacePlaceholders($value, $rowNum)
     {
-        return is_callable($replace) ? call_user_func($replace, $this->faker) : $replace;
+        if (!is_string($value)) {
+            return $value;
+        }
+
+        return str_replace('#row#', $rowNum, $value);
+    }
+
+    /**
+     * @param $replace
+     * @return mixed
+     */
+    protected function handlePossibleClosure($replace)
+    {
+        if (!is_callable($replace)) {
+            return $replace;
+        }
+
+        if ($this->generator === null) {
+            throw new Exception('You forgot to set a generator');
+        }
+
+        return call_user_func($replace, $this->generator);
     }
 
     /**
