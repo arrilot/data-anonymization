@@ -11,6 +11,8 @@
 
 ```composer require arrilot/data-anonymization```
 
+If you use Laravel framework, it's recomended to use a bridge package instead - https://github.com/arrilot/laravel-data-anonymization
+
 ## Usage
 
 Workflow:
