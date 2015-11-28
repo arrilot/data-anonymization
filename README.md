@@ -9,9 +9,12 @@
 
 ## Installation
 
-```composer require arrilot/data-anonymization```
+If you use anything from this list, you'd better install a corresponding bridge package
 
-If you use Laravel framework, it's recomended to use a bridge package instead - https://github.com/arrilot/laravel-data-anonymization
+* [Laravel] (https://github.com/arrilot/laravel-data-anonymization)
+* [Bitrix] (https://github.com/arrilot/bitrix-data-anonymization)
+
+Otherwise just ```composer require arrilot/data-anonymization```
 
 ## Usage
 
