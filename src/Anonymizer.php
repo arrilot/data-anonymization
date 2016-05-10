@@ -3,8 +3,8 @@
 namespace Arrilot\DataAnonymization;
 
 use Arrilot\DataAnonymization\Database\DatabaseInterface;
+use Exception;
 use Faker\Factory;
-use Mockery\CountValidator\Exception;
 
 class Anonymizer
 {

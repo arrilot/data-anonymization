@@ -72,7 +72,7 @@ class SqlDatabase implements DatabaseInterface
         $sql = "UPDATE
                     {$table}
                 SET
-                    {$column} = '{$newValue}'
+                    {$column} = {$this->pdo->quote($newValue)}
                 WHERE
                     {$where}";
 
