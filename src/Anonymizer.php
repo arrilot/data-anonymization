@@ -38,8 +38,6 @@ class Anonymizer
     public function __construct(DatabaseInterface $database, $generator = null)
     {
         $this->database = $database;
-
-        $this->setGenerator($generator);
     }
 
     /**
@@ -51,15 +49,7 @@ class Anonymizer
      */
     public function setGenerator($generator)
     {
-        if ($generator !== null) {
-            $this->generator = $generator;
-            return $this;
-        }
-
-        if (class_exists('\Faker\Factory')) {
-            $this->generator = Factory::create();
-        }
-
+        $this->generator = $generator;
         return $this;
     }
 
@@ -70,6 +60,9 @@ class Anonymizer
      */
     public function getGenerator()
     {
+        if (is_null($this->generator) && class_exists('\Faker\Factory')) {
+            $this->generator = Factory::create();
+        }
         return $this->generator;
     }
 
