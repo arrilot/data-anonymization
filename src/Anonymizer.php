@@ -38,6 +38,9 @@ class Anonymizer
     public function __construct(DatabaseInterface $database, $generator = null)
     {
         $this->database = $database;
+        if (!is_null($generator)) {
+            $this->setGenerator($generator);
+        }
     }
 
     /**
