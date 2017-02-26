@@ -53,6 +53,7 @@ class Anonymizer
     {
         if ($generator !== null) {
             $this->generator = $generator;
+            return $this;
         }
 
         if (class_exists('\Faker\Factory')) {
