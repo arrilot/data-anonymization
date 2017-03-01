@@ -4,7 +4,6 @@ namespace Arrilot\DataAnonymization;
 
 use Arrilot\DataAnonymization\Database\DatabaseInterface;
 use Exception;
-use Faker\Factory;
 
 class Anonymizer
 {
@@ -16,7 +15,7 @@ class Anonymizer
     protected $database;
 
     /**
-     * Generator object (e.g faker).
+     * Generator object (e.g \Faker\Factory).
      *
      * @var mixed
      */
@@ -38,6 +37,11 @@ class Anonymizer
     public function __construct(DatabaseInterface $database, $generator = null)
     {
         $this->database = $database;
+
+        if (is_null($generator) && class_exists('\Faker\Factory')) {
+            $generator = \Faker\Factory::create();
+        }
+
         if (!is_null($generator)) {
             $this->setGenerator($generator);
         }
@@ -53,6 +57,7 @@ class Anonymizer
     public function setGenerator($generator)
     {
         $this->generator = $generator;
+
         return $this;
     }
 
@@ -63,9 +68,6 @@ class Anonymizer
      */
     public function getGenerator()
     {
-        if (is_null($this->generator) && class_exists('\Faker\Factory')) {
-            $this->generator = Factory::create();
-        }
         return $this->generator;
     }
 
