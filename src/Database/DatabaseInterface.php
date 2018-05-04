@@ -11,7 +11,7 @@ interface DatabaseInterface
      * @param array       $columns
      * @param string|null $where
      *
-     * @return array
+     * @return iterable
      */
     public function getRows($table, $columns, $where);
 
