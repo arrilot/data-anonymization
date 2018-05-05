@@ -51,7 +51,10 @@ class SqlDatabase implements DatabaseInterface
             $sql .= " WHERE {$where}";
         }
 
-        return $this->pdo->query($sql)->fetchAll();
+        $stmt = $this->pdo->query($sql);
+        while ($row = $stmt->fetch()) {
+            yield $row;
+        }
     }
 
     /**
