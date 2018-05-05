@@ -121,17 +121,10 @@ class Anonymizer
      */
     protected function updateColumn($table, $primary, $column)
     {
-        $rows = $this->database->getRows(
-            $table,
-            $this->mergeColumns($primary, $column['name']),
-            $column['where']
-        );
+        $columns = $this->mergeColumns($primary, $column['name']);
+        $where = $column['where'];
 
-        if (empty($rows)) {
-            return;
-        }
-
-        foreach ($rows as $rowNum => $row) {
+        foreach ($this->database->getRows($table, $columns, $where) as $rowNum => $row) {
             $this->database->updateByPrimary(
                 $table,
                 Helpers::arrayOnly($row, $primary),
