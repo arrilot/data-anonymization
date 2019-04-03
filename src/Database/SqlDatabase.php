@@ -64,18 +64,19 @@ class SqlDatabase implements DatabaseInterface
      * @param string $table
      * @param array  $primaryKeyValue
      * @param string $column
-     * @param string $newValue
+     * @param mixed $value
      *
      * @return void
      */
-    public function updateByPrimary($table, $primaryKeyValue, $column, $newValue)
+    public function updateByPrimary($table, $primaryKeyValue, $column, $value)
     {
         $where = $this->buildWhereForArray($primaryKeyValue);
+        $quotedValue = $value === null ? $value : $this->pdo->quote($value);
 
         $sql = "UPDATE
                     {$table}
                 SET
-                    {$column} = {$this->pdo->quote($newValue)}
+                    {$column} = {$quotedValue}
                 WHERE
                     {$where}";
 
