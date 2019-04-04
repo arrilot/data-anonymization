@@ -71,7 +71,7 @@ class SqlDatabase implements DatabaseInterface
     public function updateByPrimary($table, $primaryKeyValue, $column, $value)
     {
         $where = $this->buildWhereForArray($primaryKeyValue);
-        $quotedValue = $value === null ? $value : $this->pdo->quote($value);
+        $quotedValue = $value === null ? 'null' : $this->pdo->quote($value);
 
         $sql = "UPDATE
                     {$table}
