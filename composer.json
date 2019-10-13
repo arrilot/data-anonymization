@@ -21,7 +21,7 @@
     "mockery/mockery": "~0.9"
   },
   "suggest": {
-    "fzaninotto/Faker": "^1.5"
+    "fzaninotto/faker": "^1.5"
   },
   "autoload": {
     "psr-4": {
