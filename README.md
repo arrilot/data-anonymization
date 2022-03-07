@@ -1,6 +1,4 @@
 [![Latest Stable Version](https://poser.pugx.org/arrilot/data-anonymization/v/stable.svg)](https://packagist.org/packages/arrilot/data-anonymization/)
-[![Total Downloads](https://img.shields.io/packagist/dt/arrilot/data-anonymization.svg?style=flat)](https://packagist.org/packages/Arrilot/data-anonymization)
-[![Build Status](https://img.shields.io/travis/arrilot/data-anonymization/master.svg?style=flat)](https://travis-ci.org/arrilot/data-anonymization)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/arrilot/data-anonymization/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/arrilot/data-anonymization/)
 
 # Data anonymization
