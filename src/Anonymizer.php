@@ -78,8 +78,12 @@ class Anonymizer
      */
     public function run()
     {
+        $i = 1;
         foreach ($this->blueprints as $table => $blueprint) {
             $this->applyBlueprint($blueprint);
+            echo $table;
+            echo ' ' .$i . ' / ' . count($this->blueprints) . PHP_EOL;
+            $i++;
         }
     }
 
